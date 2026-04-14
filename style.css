@@ -1,0 +1,715 @@
+/* ==========================================================================
+   CAMAÇARI DIGITAL - DESIGN SYSTEM & ESTILOS GLOBAIS
+   Baseado no Guia Visual G1 e Identidade da Prefeitura
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS (VARIÁVEIS)
+-------------------------------------------------------------------------- */
+:root {
+    /* Paleta Principal - Guia Visual G1 */
+    --color-primary: #1A7A4A;      /* Verde Camaçari - Contraste 7,2:1 */
+    --color-primary-dark: #115633;
+    --color-primary-light: #e8f3ec;
+    
+    /* Paleta Secundária - Portal da Prefeitura (Extraído da imagem) */
+    --color-purple: #8c3f91;       /* Roxo vibrante do portal */
+    --color-purple-dark: #6a256e;  /* Roxo escuro do cabeçalho */
+    --color-purple-light: #f4e8f5;
+
+    /* Cores das Secretarias (Guia Visual G1) */
+    --color-seinfra: #D97706;      /* Âmbar quente */
+    --color-sedur: #0E7490;        /* Teal frio */
+    --color-sefaz: #1D4ED8;        /* Azul neutro */
+
+    /* Tons Neutros / Escala de Cinza */
+    --color-surface: #FFFFFF;
+    --color-background: #F8F9FA;
+    --color-text-main: #1F2937;
+    --color-text-muted: #4B5563;
+    --color-border: #E5E7EB;
+
+    /* Status e Alertas */
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
+
+    /* Tipografia (Inter) */
+    --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-size-display: 2.5rem;   /* 40pt (Display) */
+    --font-size-h1: 1.75rem;       /* 28pt */
+    --font-size-h2: 1.5rem;
+    --font-size-body: 1rem;        /* 16pt */
+    --font-size-small: 0.875rem;   /* 14pt */
+    --font-size-min: 0.75rem;      /* 12pt (Mínimo absoluto) */
+    --font-weight-regular: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-black: 800;
+
+    /* Espaçamentos (Base 8px) */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-xxl: 5rem;
+
+    /* Layout & UI */
+    --container-max: 1200px;
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    
+    /* Acessibilidade WCAG */
+    --touch-target-min: 44px;      /* Apple HIG + WCAG 2.1 */
+    --transition-speed: 0.3s;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & NORMALIZE
+-------------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* Animação suave entre seções */
+    font-size: 100%;
+}
+
+body {
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-body);
+    line-height: 1.6;
+    color: var(--color-text-main);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--color-purple);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover, a:focus {
+    color: var(--color-purple-dark);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Foco Acessível (WCAG) */
+:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   3. CLASSES UTILITÁRIAS & LAYOUT BASE
+-------------------------------------------------------------------------- */
+.container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+}
+
+.bg-light {
+    background-color: var(--color-surface);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-header h2 {
+    font-size: var(--font-size-h1);
+    color: var(--color-primary-dark);
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+section {
+    padding: var(--spacing-xxl) 0;
+}
+
+/* --------------------------------------------------------------------------
+   4. COMPONENTES: BOTÕES & FORMS (Alinhados ao WCAG 2.1 AA)
+-------------------------------------------------------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--touch-target-min); /* Regra de Ouro Acessibilidade */
+    padding: 0 var(--spacing-md);
+    font-family: inherit;
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--border-radius-md);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background-color: var(--color-purple);
+    color: var(--color-surface);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-purple-dark);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--color-primary-light);
+}
+
+.btn-large {
+    font-size: 1.125rem;
+    padding: 0 var(--spacing-lg);
+    min-height: 54px;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.form-select, input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    min-height: var(--touch-target-min);
+    padding: 0 var(--spacing-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    font-family: inherit;
+    font-size: var(--font-size-body);
+    color: var(--color-text-main);
+    background-color: var(--color-surface);
+    transition: border-color var(--transition-speed);
+}
+
+.form-select:focus, input:focus, textarea:focus {
+    border-color: var(--color-purple);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-purple-light);
+}
+
+/* --------------------------------------------------------------------------
+   5. CABEÇALHO (HEADER)
+-------------------------------------------------------------------------- */
+.main-header {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.logo h1 {
+    font-size: 1.25rem;
+    color: var(--color-purple-dark);
+    font-weight: var(--font-weight-regular);
+}
+
+.logo strong {
+    font-weight: var(--font-weight-black);
+    color: var(--color-primary);
+}
+
+.nav-list {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.nav-link {
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-semibold);
+    padding: var(--spacing-xs) 0;
+    position: relative;
+}
+
+.nav-link.active, .nav-link:hover {
+    color: var(--color-primary);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO SECTION
+-------------------------------------------------------------------------- */
+.hero-section {
+    background: linear-gradient(135deg, var(--color-purple-dark) 0%, var(--color-purple) 100%);
+    color: var(--color-surface);
+    overflow: hidden;
+    padding: var(--spacing-xxl) 0;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+}
+
+.hero-text h2 {
+    font-size: var(--font-size-display);
+    font-weight: var(--font-weight-black);
+    line-height: 1.1;
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-text p {
+    font-size: var(--font-size-h2);
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.9;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+/* --------------------------------------------------------------------------
+   7. MAPA DE OBRAS
+-------------------------------------------------------------------------- */
+.map-filters {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    justify-content: center;
+}
+
+.map-filters .form-select {
+    max-width: 250px;
+}
+
+.leaflet-map-wrapper {
+    height: 500px;
+    width: 100%;
+    border-radius: var(--border-radius-lg);
+    border: 2px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    z-index: 1; /* Para não sobrepor modals */
+}
+
+/* --------------------------------------------------------------------------
+   8. TRANSPARÊNCIA ORÇAMENTÁRIA
+-------------------------------------------------------------------------- */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.chart-card {
+    background: var(--color-surface);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+}
+
+.chart-card h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-main);
+    font-size: var(--font-size-h2);
+    border-bottom: 2px solid var(--color-primary-light);
+    padding-bottom: var(--spacing-xs);
+}
+
+.canvas-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   9. VOTAÇÃO CIDADÃ (PROPOSTAS)
+-------------------------------------------------------------------------- */
+.proposals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.proposal-card {
+    background: var(--color-surface);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    border-left: 6px solid var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed);
+}
+
+.proposal-card:hover {
+    transform: translateY(-5px);
+}
+
+.proposal-badge {
+    align-self: flex-start;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: var(--font-size-min);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-sm);
+}
+
+.status-open {
+    background-color: var(--color-warning);
+    color: #fff;
+}
+
+.proposal-card h3 {
+    font-size: var(--font-size-h2);
+    margin-bottom: var(--spacing-xs);
+}
+
+.proposal-card p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1;
+}
+
+.proposal-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-small);
+}
+
+.bairro-tag {
+    background-color: var(--color-background);
+    padding: 2px 8px;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-purple-dark);
+}
+
+/* --------------------------------------------------------------------------
+   10. PESQUISA DE SATISFAÇÃO
+-------------------------------------------------------------------------- */
+.survey-section {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+}
+
+.survey-box {
+    max-width: 600px;
+    text-align: center;
+}
+
+.survey-box h2 {
+    font-size: var(--font-size-display);
+    margin-bottom: var(--spacing-xs);
+}
+
+.survey-form {
+    background: var(--color-surface);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+    margin-top: var(--spacing-lg);
+    color: var(--color-text-main);
+}
+
+.rating-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.rating-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    transition: background var(--transition-speed);
+}
+
+.rating-group label:hover {
+    background-color: var(--color-primary-light);
+}
+
+.survey-form textarea {
+    min-height: 100px;
+    margin-bottom: var(--spacing-md);
+    resize: vertical;
+}
+
+/* --------------------------------------------------------------------------
+   11. RODAPÉ (FOOTER)
+-------------------------------------------------------------------------- */
+.main-footer {
+    background-color: #111827; /* Dark Mode base */
+    color: #9CA3AF;
+    padding-top: var(--spacing-xl);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.footer-logo {
+    max-width: 200px;
+    margin-bottom: var(--spacing-md);
+    filter: grayscale(100%) brightness(200%);
+}
+
+.footer-col h4 {
+    color: var(--color-surface);
+    margin-bottom: var(--spacing-md);
+}
+
+.links-col ul li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.links-col a {
+    color: #9CA3AF;
+}
+
+.links-col a:hover {
+    color: var(--color-primary);
+}
+
+.accessibility-tools {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+}
+
+.accessibility-tools button {
+    background: #374151;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.accessibility-tools button:hover {
+    background: var(--color-primary);
+}
+
+.footer-bottom {
+    border-top: 1px solid #374151;
+    padding: var(--spacing-md) 0;
+    text-align: center;
+    font-size: var(--font-size-small);
+}
+
+/* --------------------------------------------------------------------------
+   12. MODAIS E OVERLAYS
+-------------------------------------------------------------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-speed);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--color-surface);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform var(--transition-speed);
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-text-muted);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-main);
+}
+
+/* --------------------------------------------------------------------------
+   13. ACESSIBILIDADE - ALTO CONTRASTE (Alternância via JS)
+-------------------------------------------------------------------------- */
+body.high-contrast-mode {
+    --color-primary: #000000;
+    --color-primary-dark: #000000;
+    --color-purple: #000000;
+    --color-background: #FFFFFF;
+    --color-surface: #FFFFFF;
+    --color-text-main: #000000;
+    --color-text-muted: #000000;
+    --color-border: #000000;
+    
+    * {
+        border-color: #000 !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   14. RESPONSIVIDADE (MEDIA QUERIES)
+-------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-ctas {
+        justify-content: center;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: var(--spacing-sm) 0;
+        gap: var(--spacing-sm);
+    }
+
+    .nav-list {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero-text h2 {
+        font-size: 2rem;
+    }
+
+    .map-filters {
+        flex-direction: column;
+    }
+
+    .map-filters .form-select {
+        max-width: 100%;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .accessibility-tools {
+        justify-content: center;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   15. PREFERS REDUCED MOTION (Acessibilidade SO)
+-------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
